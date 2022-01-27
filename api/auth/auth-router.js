@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { bcrypt } = require("bcryptjs");
 
+//I decided to build a users-model even though that's not specified in the readme
+
 router.post("/register", async (req, res) => {
   res.end("implement register, please!");
   /*
