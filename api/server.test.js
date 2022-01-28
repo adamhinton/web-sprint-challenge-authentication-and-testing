@@ -28,3 +28,17 @@ describe("POST auth register", () => {
     expect(res.status).toBe(422);
   });
 });
+
+describe("POST auth login", () => {
+  test("returns error if no user/pass", async () => {
+    const res = await request(server).post("/api/auth/login").send({});
+    expect(res.status).toBe(422);
+  });
+
+  test("yells at the user if username is not in use", async () => {
+    const res = await request(server)
+      .post("/api/auth/login")
+      .send({ username: "123fdsfas", password: "45fdafas6" });
+    expect(res.status).toBe(401);
+  });
+});
