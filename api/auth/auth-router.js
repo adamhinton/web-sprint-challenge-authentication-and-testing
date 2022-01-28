@@ -3,7 +3,9 @@ const bcrypt = require("bcryptjs");
 //I decided to build a users-model even though that's not specified in the readme
 const User = require("../users/users-model");
 
-router.post("/register", async (req, res) => {
+const { checkUsernameExists, checkUsernameFree } = require("./auth-middleware");
+
+router.post("/register", checkUsernameFree, async (req, res) => {
   // res.end("implement register, please!");
   /*
     IMPLEMENT

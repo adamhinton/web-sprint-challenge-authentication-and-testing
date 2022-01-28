@@ -10,7 +10,13 @@ async function add(user) {
   return findById(id);
 }
 
+function findBy(filter) {
+  //this is untested
+  return db("users").where(filter); // {username: "foo"}
+}
+
 module.exports = {
   add,
   findById,
+  findBy,
 };
