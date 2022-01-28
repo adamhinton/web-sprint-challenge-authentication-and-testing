@@ -96,6 +96,8 @@ router.post(
         message: `Welcome, ${req.user.username}`,
         token: req.user.password,
       });
+    } else {
+      res.status(401).json({ message: "invalid credentials" });
     }
   }
 );
