@@ -87,6 +87,16 @@ router.post(
       the response body should include a string exactly as follows: "invalid credentials".
   */
     // res.status(500).json({ message: "yay!" });
+    console.log("req.user:", req.user);
+    const { password } = req.body;
+    if (bcrypt.compareSync(password, req.user.password)) {
+      console.log("req:", req);
+      req.session.user = req.user;
+      res.json({
+        message: `Welcome, ${req.user.username}`,
+        token: req.user.password,
+      });
+    }
   }
 );
 
