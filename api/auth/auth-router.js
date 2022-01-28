@@ -10,12 +10,15 @@ router.post("/register", async (req, res) => {
     You are welcome to build additional middlewares to help with the endpoint's functionality.
     DO NOT EXCEED 2^8 ROUNDS OF HASHING!
 
+    //DONE
     1- In order to register a new account the client must provide `username` and `password`:
       {
         "username": "Captain Marvel", // must not exist already in the `users` table
         "password": "foobar"          // needs to be hashed before it's saved
       }
 
+
+      //DONE
     2- On SUCCESSFUL registration,
       the response body should have `id`, `username` and `password`:
       {
