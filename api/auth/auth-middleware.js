@@ -28,7 +28,7 @@ async function checkUsernameFree(req, res, next) {
 //   }
 // }
 
-function checkUserPassExist(req, res, next) {
+function checkUserPassExistInBody(req, res, next) {
   if (!req.body.password || !req.body.username) {
     res.status(422).json({ message: "username and password required" });
   } else {
@@ -36,7 +36,20 @@ function checkUserPassExist(req, res, next) {
   }
 }
 
+async function checkUsernameExistsInDB(req, res, next) {
+  try {
+    const [user] = await User.findBy({ username: req.body.username });
+    if (user) {
+      req.user = user;
+      next();
+    } else res.status(401).json({ message: "invalid credentials" });
+  } catch (err) {
+    next(err);
+  }
+}
+
 module.exports = {
   checkUsernameFree,
-  checkUserPassExist,
+  checkUserPassExistInBody,
+  checkUsernameExistsInDB,
 };
