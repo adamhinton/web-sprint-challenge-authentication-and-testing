@@ -3,11 +3,15 @@ const bcrypt = require("bcryptjs");
 //I decided to build a users-model even though that's not specified in the readme
 const User = require("../users/users-model");
 
-const { checkUsernameFree, checkUserPassExist } = require("./auth-middleware");
+const {
+  checkUsernameFree,
+  checkUserPassExistInBody,
+  checkUsernameExistsInDB,
+} = require("./auth-middleware");
 
 router.post(
   "/register",
-  checkUserPassExist,
+  checkUserPassExistInBody,
   checkUsernameFree,
   async (req, res) => {
     // res.end("implement register, please!");
@@ -53,9 +57,13 @@ router.post(
   }
 );
 
-router.post("/login", (req, res) => {
-  res.end("implement login, please!");
-  /*
+router.post(
+  "/login",
+  checkUserPassExistInBody,
+  checkUsernameExistsInDB,
+  (req, res) => {
+    // res.end("implement login, please!");
+    /*
     IMPLEMENT
     You are welcome to build additional middlewares to help with the endpoint's functionality.
 
@@ -78,6 +86,8 @@ router.post("/login", (req, res) => {
     4- On FAILED login due to `username` not existing in the db, or `password` being incorrect,
       the response body should include a string exactly as follows: "invalid credentials".
   */
-});
+    // res.status(500).json({ message: "yay!" });
+  }
+);
 
 module.exports = router;
