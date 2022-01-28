@@ -16,11 +16,15 @@ test("sanity", () => {
 });
 
 describe("POST auth register", () => {
-  test("adds new user", async () => {
+  test("returns 200 status", async () => {
     const res = await request(server)
       .post("/api/auth/register")
       .send({ username: "123", password: "456" });
-    console.log("res:", res);
     expect(res.status).toBe(200);
+  });
+
+  test("returns error if no password", async () => {
+    const res = await request(server).post("/api/auth/register").send({});
+    expect(res.status).toBe(422);
   });
 });
