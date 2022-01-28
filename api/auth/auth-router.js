@@ -41,7 +41,6 @@ router.post(
   */
     try {
       const { username, password } = req.body;
-      // const hash = bcrypt.hashSync(password, 8); // 2 ^ 8
       const hash = bcrypt.hashSync(password, 8);
       const newUser = { username, password: hash };
       const inserted = await User.add(newUser);
