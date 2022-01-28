@@ -2,6 +2,7 @@ const router = require("express").Router();
 const bcrypt = require("bcryptjs");
 //I decided to build a users-model even though that's not specified in the readme
 const User = require("../users/users-model");
+const makeToken = require("./auth-token-builder");
 
 const {
   checkUsernameFree,

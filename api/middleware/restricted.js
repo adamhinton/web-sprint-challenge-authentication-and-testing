@@ -1,5 +1,25 @@
+const jwt = require("jsonwebtoken");
+// const findBy = require("../users/users-model");
+const { JWT_SECRET } = require("../secrets/index");
+
 module.exports = (req, res, next) => {
-  next();
+  // res.status(404).json({ message: "req.blah blah" });
+
+  const token = req.headers.authorization;
+  if (!token) {
+    res.status(401).json({ message: "token required" });
+  } else {
+    jwt.verify(token, JWT_SECRET, (err, decodedToken) => {
+      if (err) {
+        res.status(401).json({ message: "token invalid" });
+      } else {
+        req.decodedToken = decodedToken;
+        next();
+      }
+    });
+  }
+
+  // next();
   /*
     IMPLEMENT
 
