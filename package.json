@@ -23,8 +23,10 @@
   },
   "devDependencies": {
     "@types/jest": "27.0.3",
+    "connect-session-knex": "^2.1.1",
     "cross-env": "7.0.3",
     "eslint": "8.4.1",
+    "express-session": "^1.17.2",
     "jest": "27.4.4",
     "nodemon": "2.0.15",
     "supertest": "6.1.6"
